@@ -1,0 +1,144 @@
+---
+title: Create a modal using Typescript
+tags:
+  - react
+  - typescript
+  - javascript
+  - modal
+  - dom
+  - react portals
+date: 2022-06-03
+excerpt: This post will talk about the benefits of using a React portal to create a modal, why it works this way and other potential uses.
+---
+
+## React Portals and how to use them
+
+### What are they?
+
+Portals enable us to render a DOM node outside of the parent DOM hierarchy. I think of them as a component that you can attach to another display it and have all the benefits of a standard component.
+
+### Why would we use them?
+
+They have many use-cases but the most common are
+
+- Modals
+- Tooltips
+- Loaders
+
+### How do we use them?
+
+The syntax for using a portal is
+
+```javascript
+ReactDOM.createPortal(child, container);
+```
+
+Here is the [React offical documentation](https://reactjs.org/docs/portals.html) on Portals for another explanation.
+
+The child is any component that we want to render here. The second argument is a DOM element.
+
+The portal can access context and state exactly the same as the DOM element it is connected to. It behaves in the same way as a normal component.
+
+### Creating a modal
+
+To create this modal we will create four new files and import the Modal component into App.tsx to display it.
+
+- modal.tsx : This will be our actual modal component
+- modalFunctions.ts : This will contain the logic and state for the Modal. I find it's best practice to seperate out functions where I can to make testing them easier.
+- modal.types.ts : This will contain our modal types
+- App.tsx : In here will be a button to display the modal and the modal itself
+
+```Typescript
+//Modal.tsx
+import React from "react"
+import ReactDOM from "react-dom";
+import { IModalProps } from "./modal.types/"
+
+
+export const Modal = ({ isShown, hide, modalContent,
+	headerText}: IModalProps) => {
+
+    const modal = (
+        <div>
+            <h2>
+            Title of the modal outside of the parent component but inside the DOM tree
+            </h2>
+            <button onClick={hide}>
+                Close
+            </button>
+            <p>{modalContent}</p>
+        </div>
+    );
+
+    return isShown
+        ? ReactDOM.createPortal(modal, document.body)
+        : null;
+};
+```
+
+The bottom three lines of this file is the most important. It uses a ternary operator to decide if the Modal should be shown.
+
+Our Modal types
+
+```Typescript
+//modal.types.ts
+export interface IModalProps {
+	isShown?: boolean;
+	hide?: () => void;
+	modalContent?: JSX.Element;
+	headerText?: string;
+}
+```
+
+In the functions folder we will create state and a toggle function to display the modal.
+
+```Typescript
+//modalFunctions.ts
+import { useState } from "react";
+
+export const useModal = () => {
+    const [isShown, setIsShown] = useState<boolean>(false);
+
+    const toggle = () => setIsShown(!isShown);
+
+    return {
+        isShown,
+        toggle,
+    };
+};
+```
+
+Here is our App component where we import the modal and provide a button to toggle if it is displayed.
+
+```Typescript
+//App.tsx
+import './App.css'
+import React, { useState } from "react"
+import { Modal } from "./modal"
+import { useModal } from "./modalfunctions";
+
+
+export default function App() {
+
+    const { isShown, toggle} = useModal();
+
+    return (
+        <div>
+            <button onClick={toggle}>
+                Open modal
+            </button>
+                <Modal
+                isShown={isShown}
+                hide={toggle}
+                modalContent={"This is the modal content"}
+                />
+        </div>
+    )
+}
+```
+
+### Conclusion
+
+Creating a modal like this means the modal will not inherit the width and size properties of the parent component but will have all the functionality of a normal React component. The most important part of the files is line
+
+This [link](https://replit.com/@adampatt/Typescript-Modal-using-React-Portal#src/App.tsx) is a repl containing the above code as functioning demo. Please play around with it and send me any questions you have about it.

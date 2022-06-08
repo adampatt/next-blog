@@ -1,0 +1,44 @@
+---
+title: Choosing between Hooks and Redux for a small application
+tags:
+  - react
+  - redux
+  - contextAPI
+  - useReducer
+  - javascript
+  - react-hooks
+date: 2022-01-03
+excerpt: What to think about during the decision making process when deciding on what state management to use when building a small application.
+---
+
+## Hooks v Redux
+
+### Example app
+
+For context this initial mobile-app built with React-Native consisted of a opening quiz five questions in length then three pages available to the user once completing the quiz. The quiz answers provided custom data which was fetched using GraphQL.
+
+I chose to go with useContext and useReducer instead of Redux to manage data in the initial version of this app. This was a decision not taken lightly with factors such as speed of implementation, learning curve for the team and application complexity taken into account when deciding between the two.
+
+I'll briefly explain how the three work below and provide greater detail as to why I came to this decision.
+
+### Redux
+
+Redux is a state management library that provides a single source of truth. The global state of an app is stored in an object tree inside a single store. The access to state in this store is read only. These two ideas, single source of truth and state is read only are two of the three key principles of Redux the other being changes to state are made using pure functions.
+
+All state changes are handled by dispatching actions. This format provides immutability, efficiency and scalability for larger apps
+
+### ContextAPI
+
+useContext is react hook that enables you to share data that can be considered “global” for a tree of React components, such as the current user details or form answers. Unlike Redux state can be changed inside the hook. The useContext hook can be wrapped around the highest-level component with multiple components inside also wrapped in different hooks. This enables the data to be passed down to all sub-components.
+
+### Reducer hook
+
+To have access to almost the full capabilities of Redux we can use the useReducer hook with useContext. useReducer dispatches the original state with an action which updates the state this is much the same as the Redux flow for managing and changing state.
+
+### Why
+
+I chose useContext and useReducer over Redux for our initial app because of their speed to set-up and use. This initial version of the app is basic with a minimal number of components that require state. This was important to take into account because useContext rerenders every component in its tree when passing data down to the required component, which can cause performance issues in larger applications. This is unlike Redux that only re-renders the updated components.
+
+Redux also has a steeper learning curve which will slow us down as some of the team have no previous experience with using it or the reducer pattern.
+
+There could be issues further down the line when the app becomes larger and harder to maintain with hooks only. This though is a tradeoff worth making at this early stage in the product's lifecycle.

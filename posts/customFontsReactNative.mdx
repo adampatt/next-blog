@@ -1,0 +1,177 @@
+---
+title: Adding custom fonts to a React-Native project.
+tags:
+  - react-native
+  - expo
+  - google-fonts
+date: 2021-12-10
+excerpt: In this tutorial you will learn how to install and use a custom font in a React-Native project. The final code pattern can be used within any react native component that you require to have a custom font.
+---
+
+## Custom fonts in React-native
+
+### Prerequisites
+
+Expo installed on your local machine. You can learn how to install [here](https://docs.expo.dev/).
+
+A React Native project project open. A guide on how to set-up a project can be found in the [React Native documentation](https://reactnative.dev/docs/environment-setup).
+
+### Installing additional packages
+
+You will begin by installing the expo-font and expo-app-loading packages. These packages are required to render custom fonts in a React Native project.
+
+### expo-font
+
+Expo enables you to load fonts from the web and use them in a react native component. To install the package navigate to the command line within your project and paste the code in below.
+
+```javascript
+$ expo install expo-font
+```
+
+### expo-app-loading
+
+This package tells your project to display the splash screen while the fonts are being downloaded. It is used to download fonts, logos and other assets that you require for your project. To install the package navigate to the command line within your project and paste the code in below.
+
+```javascript
+$ expo install expo-app-loading
+```
+
+### Importing the libraries to the component
+
+In the App.js file you will now import the two previously downloaded libraries. These are placed at the top of your file.
+
+```javascript
+App.js
+
+import React from "react"
+<--> Lines to add below
+import * as Font from "expo-font";
+import Apploading from "expo-app-loading";
+```
+
+### Adding the fonts to the project as an asset
+
+The next step is for you to choose your fonts in this tutorial I am using Poppins from google fonts. You will download the fonts as a folder to your local machine then create a new folder inside your project call assets. I find the best place to create this folder is inside the src. Your folder structure will end up looking like this
+
+```javascript
+AppName
+| -- public
+| -- src
+    | -- pages
+    | -- assets
+        | -- Imported google fonts file
+```
+
+### Using the loadAsync method
+
+The next step is to create the loadAsync method inside your App.js file which is how your fonts will be loaded. The naming convention is important to take notice of here as it is how you will reference the font when you want to use it.
+
+Inside your App.js file above your main function enter the code below.
+
+```javascript
+App.js;
+
+const getFonts = () =>
+  Font.loadAsync({
+    Poppins_400Regular: require("../assets/Poppins/Poppins-Regular.ttf"),
+  });
+```
+
+The function above is importing the Poppins regular font asynchronously from the assets folder.
+
+### Creating state for the font
+
+You will create a local state here to describe if the font have been successfully downloaded or if the page still needs to wait.
+
+Inside your App.js file within your main function enter the code below.
+
+```javascript
+App.js;
+
+const [fontAvailable, setFontsAvailable] = useState(false);
+```
+
+You will also need to import useState at the top of your file.
+
+```javascript
+App.js;
+
+import React, { useState } from "react";
+```
+
+These two steps ensure that you can change the state of fontAvailable in the next step
+
+### Using AppLoading
+
+You will set up an if statement that holds the main body of your file here. This uses AppLoading to asynchronously fetch your fonts while the page loads. Once the fonts are loaded it will then display the contents of your page. Inside your App.js file insert the code below.
+
+```javascript
+App.js
+
+if (fontLoading === false) {
+  return (
+      <Apploading
+        startAsync={getFonts}
+        onFinish={() => {
+          setFontsLoading(true);
+        }}
+        onError={console.warn}
+      />
+    );
+  } else {
+    return (
+    //You can return your View or any component here
+    );
+  }
+```
+
+This function is saying while fontLoading is not true run the AppLoading function which when it has finished and fetches your fonts sets the state of fontLoading to true. This then triggers the if statement to run again and now returns the body of your file.
+
+### The final App.js
+
+```javascript
+App.js;
+import React, { useState } from "react";
+import * as Font from "expo-font";
+import Apploading from "expo-app-loading";
+
+const getFonts = () =>
+  Font.loadAsync({
+    Poppins_400Regular: require("../assets/Poppins/Poppins-Regular.ttf"),
+  });
+
+export default function App() {
+  const [fontsLoading, setFontsLoading] = useState(false);
+
+  if (fontsloaded === false) {
+    return (
+      <Apploading
+        startAsync={getFonts}
+        onFinish={() => setFontsLoading(true)}
+        onError={console.warn}
+      />
+    );
+  } else {
+    return (
+      <View>
+        <Text style={styles.NewFontFamily}>Hello world</Text>
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  NewFontFamily: {
+    fontFamily: Poppins_400Regular,
+  },
+});
+```
+
+Congratulations you have now been able to import and use a custom font inside a React-Native project. If you enjoyed this tutorial or have some feedback please get in touch with me at adampattison08@gmail.com .
+
+### Further resources
+
+[expo-font documentation](https://docs.expo.dev/versions/latest/sdk/font/)
+[expo-app-loading documentation](https://docs.expo.dev/versions/latest/sdk/app-loading/)
+[google-fonts ](https://fonts.google.com/)
+[React-Native](https://reactnative.dev/)
