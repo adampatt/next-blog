@@ -1,10 +1,13 @@
 import styled from "styled-components";
 import { theme } from "../../styles/theme";
 
-export const CardHolder = styled.div`
+export const CardHolder = styled.section`
   width: 100%;
   display: flex;
   flex-wrap: wrap;
+  padding-top: 3%;
+  margin-top: 1%;
+  border-top: 1px dotted gray;
 `;
 
 export const CardContainer = styled.div`

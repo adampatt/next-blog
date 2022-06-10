@@ -17,8 +17,8 @@ import Link from "next/link";
 export default function Portfolio() {
   return (
     <>
-      <h1>Projects</h1>
       <CardHolder>
+        <h1>Projects</h1>
         {data.map((project) => (
           <>
             <CardContainer key={project.title}>

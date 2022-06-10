@@ -43,3 +43,12 @@ export const Text = styled.p`
   font-weight: "light";
   letter-spacing: 1.2px;
 `;
+
+export const CardHolder = styled.section`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 3%;
+  margin-top: 1%;
+  border-top: 1px dotted gray;
+`;

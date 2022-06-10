@@ -1,8 +1,8 @@
 import type { AppProps } from "next/app";
-import Link from "next/link";
 import Head from "next/head";
 import "@/styles/globals.css";
-import { Title } from "../styles/articles.style";
+import { Navbar } from "@/src/components/navbar";
+import { Footer } from "../src/components/footer";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -10,12 +10,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <title>Adam Pattison Portfolio</title>
       </Head>
-      <nav>
-        <Title>
-          <p>Home</p>
-        </Title>
-      </nav>
+      <Navbar />
+
       <Component {...pageProps} />
+      <Footer />
     </div>
   );
 }

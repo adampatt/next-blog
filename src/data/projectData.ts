@@ -1,5 +1,20 @@
 export const data = [
   {
+    link: "https://app.netlify.com/sites/nimble-trifle-dd1641/overview",
+    title: "Component Library",
+    subtitle: "A Component library for your projects",
+    details:
+      "The component library enables you to import preconifgured components for your React app. It was created using Typescript, Storybook and was published using Github actions and Semantic release.",
+    githubLink: "https://github.com/adampatt/comp-lib",
+    list: [
+      "Typescript",
+      "StoryBook",
+      "Github Actions",
+      "Semantic Release",
+      "NPM",
+    ],
+  },
+  {
     link: "https://clinquant-salamander-4f6b79.netlify.app/",
     title: "SpaceX rocket, launches and launchpads",
     subtitle: "A page consuming and displaying SpaceX data",
@@ -25,25 +40,6 @@ export const data = [
       "Jest",
       "Bcrypt",
     ],
-  },
-  {
-    link: "https://african-marketplace-project.vercel.app/",
-    title: "African Marketplace",
-    subtitle: "Marketplace for buying and selling homemade goods",
-    details:
-      "This CRUD app was built as part of a project week while attending a coding course. I along with a colleague was responsible for creating the database. It is relational database using Express apis to access data.",
-    githubLink:
-      "https://github.com/Build-Week-African-Marketplace-02/african-marketplace",
-    list: ["Node.js", "PostgreSQL", "Express"],
-  },
-  {
-    link: "https://github.com/adampatt/next-ts-frontend-template",
-    title: "Next.js starter template",
-    subtitle: "A Next.js and Typescript template to start your project",
-    details:
-      "An opinionated starter template to begin Next.js projects with. It comes set up with Prettier and EsLint and testing using Cypress.",
-    githubLink: "https://github.com/adampatt/next-ts-frontend-template",
-    list: ["TypeScript", "Cypress", "EsLint", "Prettier"],
   },
   {
     link: "https://tubular-shortbread-59d8e3.netlify.app/",
@@ -79,5 +75,24 @@ export const data = [
       "A single page application displaying the current top 50 cryptocurrency coins. Built using typescript and ContextAPI. The data is displayed using a third party library recharts.",
     githubLink: "https://github.com/adampatt/cryptograph",
     list: ["Typescript", "Recharts", "tailwindCSS", "ContextAPI"],
+  },
+  {
+    link: "https://github.com/adampatt/next-ts-frontend-template",
+    title: "Next.js starter template",
+    subtitle: "A Next.js and Typescript template to start your project",
+    details:
+      "An opinionated starter template to begin Next.js projects with. It comes set up with Prettier and EsLint and testing using Cypress.",
+    githubLink: "https://github.com/adampatt/next-ts-frontend-template",
+    list: ["TypeScript", "Cypress", "EsLint", "Prettier"],
+  },
+  {
+    link: "https://african-marketplace-project.vercel.app/",
+    title: "African Marketplace",
+    subtitle: "Marketplace for buying and selling homemade goods",
+    details:
+      "This CRUD app was built as part of a project week while attending a coding course. I along with a colleague was responsible for creating the database. It is relational database using Express apis to access data.",
+    githubLink:
+      "https://github.com/Build-Week-African-Marketplace-02/african-marketplace",
+    list: ["Node.js", "PostgreSQL", "Express"],
   },
 ];

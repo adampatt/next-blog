@@ -1,0 +1,27 @@
+.footer {
+  display: flex;
+  justify-content: space-evenly;
+  border-top: 1px dotted gray;
+  padding-top: 3%;
+  margin-top: 1%;
+}
+
+.p {
+  font-family: black;
+  font-size: 0.85em;
+  font-weight: "light";
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  font-family: "Roboto", "Helvetiva Neue", "Helvetica", "Aria", "sans-serif";
+}
+
+.a {
+  padding-right: 0.5em;
+  cursor: pointer;
+  color: orange;
+  text-decoration: none;
+}
+
+.a:hover {
+  color: green;
+}
